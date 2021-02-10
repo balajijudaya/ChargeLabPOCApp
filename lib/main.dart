@@ -1,6 +1,7 @@
 import 'package:ChargeLabPoCApp/login_page.dart';
 import 'package:ChargeLabPoCApp/signup_page.dart';
 import 'package:ChargeLabPoCApp/components/auth_service.dart';
+import 'package:ChargeLabPoCApp/verification_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -44,6 +45,12 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                       shouldShowSignUp: _authService.showSignUp,
                       didProvideCredentials: _authService.loginWithCredentials,
                     ),
+                  ),
+                
+                // Show verification code page
+                if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
+                  MaterialPage(child: 
+                    VerificationPage(didProvideVerificationCode: _authService.verifyCode)
                   ),
 
                 // show sign up page
