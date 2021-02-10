@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  // Triggered to show signup page for new users
+  final VoidCallback shouldShowSignUp;
+
+  LoginPage({Key key, this.shouldShowSignUp}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -21,9 +26,7 @@ class _LoginPageState extends State<LoginPage> {
             alignment: Alignment.bottomCenter,
             child: FlatButton(
               child: Text("Don't have an account? Sign up!"),
-              onPressed: () {
-
-              },
+              onPressed: widget.shouldShowSignUp,
             ),
           )
         ],),
