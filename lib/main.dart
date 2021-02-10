@@ -1,6 +1,6 @@
 import 'package:ChargeLabPoCApp/login_page.dart';
 import 'package:ChargeLabPoCApp/signup_page.dart';
-import 'package:ChargeLabPoCApp/components/user_auth.dart';
+import 'package:ChargeLabPoCApp/components/auth_service.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -39,11 +39,21 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
               pages: [
                 // Show login page
                 if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
-                  MaterialPage(child: LoginPage(shouldShowSignUp: _authService.showSignUp,)),
+                  MaterialPage(child: 
+                    LoginPage(
+                      shouldShowSignUp: _authService.showSignUp,
+                      didProvideCredentials: _authService.loginWithCredentials,
+                    ),
+                  ),
 
                 // show sign up page
                 if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp)
-                  MaterialPage(child: SignUpPage(shouldShowLogin: _authService.showLogin,)),
+                  MaterialPage(child: 
+                    SignUpPage(
+                      shouldShowLogin: _authService.showLogin,
+                      didProvideCredentials: _authService.signUpWithCredentials,
+                      )
+                    ),
 
               ],
               onPopPage: (route, result) => route.didPop(result),

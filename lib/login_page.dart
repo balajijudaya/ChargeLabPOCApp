@@ -1,10 +1,12 @@
+import 'package:ChargeLabPoCApp/components/auth_credentials.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  final ValueChanged<LogInCredentials> didProvideCredentials;
   // Triggered to show signup page for new users
   final VoidCallback shouldShowSignUp;
 
-  LoginPage({Key key, this.shouldShowSignUp}) : super(key: key);
+  LoginPage({Key key, this.didProvideCredentials, this.shouldShowSignUp}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -74,6 +76,13 @@ class _LoginPageState extends State<LoginPage> {
     final password = _passwordController.text.trim();
 
     print("username: $username\npassword: $password\n");
+
+    // Create and pass the credentials
+    final credentials = LogInCredentials(
+      username: username,
+      password: password
+    );
+    widget.didProvideCredentials(credentials);
   }
 }
 
