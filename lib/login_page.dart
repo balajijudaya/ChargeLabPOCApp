@@ -6,8 +6,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 40),
         child: Stack(children: [
-          loginForm(),
+          _loginForm(),
           // Sign up button
           Container(
             alignment: Alignment.bottomCenter,
@@ -33,13 +33,13 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-  Widget loginForm() {
+  Widget _loginForm() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Username field
         TextField(
-          controller: usernameController,
+          controller: _usernameController,
           decoration: InputDecoration(
             icon: Icon(Icons.mail),
             labelText: "Username",
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         // Password field
         TextField(
-          controller: passwordController,
+          controller: _passwordController,
           decoration: InputDecoration(
             icon: Icon(Icons.lock_open),
             labelText: "Password",
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         // Login Button
         FlatButton(
-          onPressed: login,
+          onPressed: _login,
           child: Text("Login"),
           color: Theme.of(context).accentColor,
         ),
@@ -66,9 +66,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 
-  void login() {
-    final username = usernameController.text.trim();
-    final password = passwordController.text.trim();
+  void _login() {
+    final username = _usernameController.text.trim();
+    final password = _passwordController.text.trim();
 
     print("username: $username\npassword: $password\n");
   }
