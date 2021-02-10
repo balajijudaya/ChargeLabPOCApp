@@ -1,6 +1,6 @@
 import 'package:ChargeLabPoCApp/login_page.dart';
 import 'package:ChargeLabPoCApp/signup_page.dart';
-import 'package:ChargeLabPoCApp/user_auth.dart';
+import 'package:ChargeLabPoCApp/components/user_auth.dart';
 import 'package:flutter/material.dart';
 
 void main() {
