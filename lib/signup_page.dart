@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
           controller: _passwordController,
           decoration: InputDecoration(
             icon: Icon(Icons.lock_open),
-            labelText: "Password",
+            labelText: "Password (8-16 chars)",
           ),
         ),
 

@@ -44,6 +44,13 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
           if (snapshot.hasData) {
             return Navigator(
               pages: [
+                // Show App Pages
+                if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
+                  MaterialPage(child: 
+                    PageFlow(shouldLogOut: _authService.logOut
+                    )
+                  ),
+                  
                 // Show login page
                 if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
                   MaterialPage(child: 
@@ -70,12 +77,6 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                     )
                   ),
 
-                // Show App Pages
-                if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
-                  MaterialPage(child: 
-                    PageFlow(shouldLogOut: _authService.logOut
-                    )
-                  ),
               ],
               onPopPage: (route, result) => route.didPop(result),
             );

@@ -68,14 +68,18 @@ class AuthService {
         options: CognitoSignUpOptions(userAttributes: userAttributes)
       );
 
-            // Log in user on successful sign up otherwise verify user email
+      // Set credentials and verify user email
+      this._credentials = credentials;
+      final state = AuthState(authFlowStatus: AuthFlowStatus.verification);
+      authStateController.add(state);
+      
+      // Log in user on successful sign up
       if (result.isSignUpComplete) {
         loginWithCredentials(credentials);
-      } else {
-        this._credentials = credentials;
-        final state = AuthState(authFlowStatus: AuthFlowStatus.verification);
-        authStateController.add(state);
+
+        print('\nHEEEERE\n');
       }
+    
     } on AuthException catch (authError) {
       print("Failed to sign up - ${authError.message}");
     }
