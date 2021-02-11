@@ -47,4 +47,9 @@ class AuthService {
     authStateController.add(state);
   }
   
+  // Log out by setting Authstate back to login
+  void logOut() {
+    final state = AuthState(authFlowStatus: AuthFlowStatus.login);
+    authStateController.add(state);
+  }
 }

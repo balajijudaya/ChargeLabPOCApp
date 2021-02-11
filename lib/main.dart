@@ -1,4 +1,5 @@
 import 'package:ChargeLabPoCApp/login_page.dart';
+import 'package:ChargeLabPoCApp/page_flow.dart';
 import 'package:ChargeLabPoCApp/signup_page.dart';
 import 'package:ChargeLabPoCApp/components/auth_service.dart';
 import 'package:ChargeLabPoCApp/verification_page.dart';
@@ -44,14 +45,9 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                     LoginPage(
                       shouldShowSignUp: _authService.showSignUp,
                       didProvideCredentials: _authService.loginWithCredentials,
-                    ),
+                    )
                   ),
                 
-                // Show verification code page
-                if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
-                  MaterialPage(child: 
-                    VerificationPage(didProvideVerificationCode: _authService.verifyCode)
-                  ),
 
                 // show sign up page
                 if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp)
@@ -62,6 +58,19 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                       )
                     ),
 
+                // Show verification code page
+                if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
+                  MaterialPage(child: 
+                    VerificationPage(didProvideVerificationCode: _authService.verifyCode
+                    )
+                  ),
+
+                // Show App Pages
+                if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
+                  MaterialPage(child: 
+                    PageFlow(shouldLogOut: _authService.logOut
+                    )
+                  ),
               ],
               onPopPage: (route, result) => route.didPop(result),
             );
