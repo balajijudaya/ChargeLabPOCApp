@@ -26,7 +26,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   void initState() {
     super.initState();
     _configureAmplify();
-    _authService.showLogin();
+    _authService.checkAuthStatus();
   }
 
 
