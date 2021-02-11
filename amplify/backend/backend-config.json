@@ -1,1 +1,10 @@
-{}
+{
+	"auth": {
+		"chargelabpocapp5fb0f213": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}

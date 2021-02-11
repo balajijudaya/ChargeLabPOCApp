@@ -1,8 +1,11 @@
+import 'package:ChargeLabPoCApp/amplifyconfiguration.dart';
 import 'package:ChargeLabPoCApp/login_page.dart';
 import 'package:ChargeLabPoCApp/page_flow.dart';
 import 'package:ChargeLabPoCApp/signup_page.dart';
 import 'package:ChargeLabPoCApp/components/auth_service.dart';
 import 'package:ChargeLabPoCApp/verification_page.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,11 +19,13 @@ class ChargeLabPoCApp extends StatefulWidget {
 }
 
 class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
+  final _amplify = Amplify;
   final _authService = AuthService();
 
   @override
   void initState() {
     super.initState();
+    _configureAmplify();
     _authService.showLogin();
   }
 
@@ -84,5 +89,17 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
         }
       )
     );
+  }
+
+  // Configures amplify
+  void _configureAmplify() async {
+    _amplify.addPlugin(AmplifyAuthCognito());
+
+    try {
+      await _amplify.configure(amplifyconfig);
+      print("Successfully configured Amplify");
+    } catch (e) {
+      print("Could not configure Amplify");
+    }
   }
 }

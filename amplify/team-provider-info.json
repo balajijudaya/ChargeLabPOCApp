@@ -10,6 +10,11 @@
             "StackName": "amplify-chargelabpocapp-dev-93501",
             "StackId": "arn:aws:cloudformation:us-west-2:765570955667:stack/amplify-chargelabpocapp-dev-93501/79dfdf10-6c8f-11eb-9d13-0656c9cf6b7f",
             "AmplifyAppId": "d32pme04lxygop"
+        },
+        "categories": {
+            "auth": {
+                "chargelabpocapp5fb0f213": {}
+            }
         }
     }
 }
