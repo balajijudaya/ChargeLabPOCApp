@@ -50,15 +50,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                     PageFlow(shouldLogOut: _authService.logOut
                     )
                   ),
-                  
-                // Show login page
-                if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
-                  MaterialPage(child: 
-                    LoginPage(
-                      shouldShowSignUp: _authService.showSignUp,
-                      didProvideCredentials: _authService.loginWithCredentials,
-                    )
-                  ),
+
                 
 
                 // show sign up page
@@ -77,6 +69,14 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                     )
                   ),
 
+                // Show login page
+                if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
+                  MaterialPage(child: 
+                    LoginPage(
+                      shouldShowSignUp: _authService.showSignUp,
+                      didProvideCredentials: _authService.loginWithCredentials,
+                    )
+                  ),
               ],
               onPopPage: (route, result) => route.didPop(result),
             );

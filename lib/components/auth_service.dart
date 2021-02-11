@@ -76,8 +76,6 @@ class AuthService {
       // Log in user on successful sign up
       if (result.isSignUpComplete) {
         loginWithCredentials(credentials);
-
-        print('\nHEEEERE\n');
       }
     
     } on AuthException catch (authError) {
@@ -102,9 +100,6 @@ class AuthService {
     } on AuthException catch (authError) {
       print("Could not verify code - ${authError.message}");
     }
-
-    //final state = AuthState(authFlowStatus: AuthFlowStatus.session);
-    //authStateController.add(state);
   }
   
   // Sign out user & return to log in page

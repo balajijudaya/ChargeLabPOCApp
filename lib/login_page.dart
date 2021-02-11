@@ -1,4 +1,5 @@
 import 'package:ChargeLabPoCApp/components/auth_credentials.dart';
+import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,6 +23,22 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 40),
         child: Stack(children: [
+          Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 100),
+                child: Center(child: BrandLogo(
+                  height: 64,
+                  width: 64,
+                )),
+              ),
+              BrandMessage(
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
           _loginForm(),
           // Sign up button
           Container(

@@ -1,4 +1,6 @@
+import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // Slim version of log in page that passes a verification code up the widget tree
 class VerificationPage extends StatefulWidget {
@@ -28,6 +30,22 @@ class _VerificationPageState extends State<VerificationPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Padding(
+          padding: EdgeInsets.only(top: 100),
+          child: Center(child: BrandLogo(
+            height: 64,
+            width: 64,
+          )),
+        ),
+        BrandMessage(
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          "A verification code has been sent to your email."
+        ),
+
         // Verification code text field
         TextField(
           controller: _verificationCodeController,
