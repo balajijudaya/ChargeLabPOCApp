@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-chargelabpocapp-dev-93501-authRole",
+            "UnauthRoleArn": "arn:aws:iam::765570955667:role/amplify-chargelabpocapp-dev-93501-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::765570955667:role/amplify-chargelabpocapp-dev-93501-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-chargelabpocapp-dev-93501-deployment",
+            "UnauthRoleName": "amplify-chargelabpocapp-dev-93501-unauthRole",
+            "StackName": "amplify-chargelabpocapp-dev-93501",
+            "StackId": "arn:aws:cloudformation:us-west-2:765570955667:stack/amplify-chargelabpocapp-dev-93501/79dfdf10-6c8f-11eb-9d13-0656c9cf6b7f",
+            "AmplifyAppId": "d32pme04lxygop"
+        }
+    }
+}
