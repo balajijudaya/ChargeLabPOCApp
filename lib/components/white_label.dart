@@ -5,11 +5,13 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 
+/*
+
+*/
 class BrandLogo extends StatelessWidget {
   final double width;
   final double height;
   
-
   BrandLogo({@required this.width, @required this.height});
 
   @override
@@ -24,12 +26,13 @@ class BrandLogo extends StatelessWidget {
   }
 }
 
+/*
 
+*/
 class BrandMessage extends StatelessWidget {
   final TextStyle style;
 
   BrandMessage({this.style});
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,3 +42,13 @@ class BrandMessage extends StatelessWidget {
     );
   }
 }
+
+/*
+  Brand Themes
+*/
+final brandTheme = ThemeData(
+  primaryColor: Colors.blue,
+  accentColor: Colors.blueAccent,
+  backgroundColor: Colors.white,
+  
+);
