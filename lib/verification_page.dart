@@ -1,6 +1,5 @@
 import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 // Slim version of log in page that passes a verification code up the widget tree
 class VerificationPage extends StatefulWidget {

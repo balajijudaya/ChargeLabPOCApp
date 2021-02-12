@@ -1,4 +1,5 @@
 import 'package:ChargeLabPoCApp/amplifyconfiguration.dart';
+import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:ChargeLabPoCApp/login_page.dart';
 import 'package:ChargeLabPoCApp/page_flow.dart';
 import 'package:ChargeLabPoCApp/signup_page.dart';
@@ -26,7 +27,8 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   void initState() {
     super.initState();
     _configureAmplify();
-    _authService.checkAuthStatus();
+    _authService.showLogin();
+    //_authService.checkAuthStatus();
   }
 
 
@@ -34,10 +36,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Charge Lab PoC App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: brandTheme(),
       home: StreamBuilder<AuthState>(
         stream: _authService.authStateController.stream,
         builder: (context, snapshot) {
@@ -50,8 +49,6 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                     PageFlow(shouldLogOut: _authService.logOut
                     )
                   ),
-
-                
 
                 // show sign up page
                 if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp)

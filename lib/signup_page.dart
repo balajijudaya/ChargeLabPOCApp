@@ -1,3 +1,4 @@
+import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
 import 'components/auth_credentials.dart';
 
@@ -44,6 +45,19 @@ class _SignUpPageState extends State<SignUpPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Center(child: BrandLogo(
+            height: 64,
+            width: 64,
+          ),
+        ),
+        BrandMessage(
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(bottom: 100),
+        ),
         // Username text field
         TextField(
           controller: _usernameController,

@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
           Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 100),
+                padding: EdgeInsets.only(top: 80),
                 child: Center(child: BrandLogo(
                   height: 64,
                   width: 64,
@@ -37,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              Padding(padding: EdgeInsets.only(bottom: 25)),
             ],
           ),
           _loginForm(),

@@ -1,12 +1,12 @@
 /*
   File containing all the definitions for messages, logos, etc., for easy and quick
-  brand specific app customization.
+  brand specific app customization all in one place.
 */
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 
 /*
-
+  
 */
 class BrandLogo extends StatelessWidget {
   final double width;
@@ -46,9 +46,13 @@ class BrandMessage extends StatelessWidget {
 /*
   Brand Themes
 */
-final brandTheme = ThemeData(
-  primaryColor: Colors.blue,
-  accentColor: Colors.blueAccent,
-  backgroundColor: Colors.white,
-  
-);
+ThemeData brandTheme() {
+  return ThemeData(
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    primarySwatch: Colors.blue,
+    primaryColor: Color(0xFF18a1d7),
+    accentColor: Colors.blueAccent,
+    backgroundColor: Colors.white,
+    
+  );
+}
