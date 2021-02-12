@@ -51,7 +51,7 @@ ThemeData brandTheme() {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primarySwatch: Colors.blue,
     primaryColor: Color(0xFF18a1d7),
-    accentColor: Colors.blueAccent,
+    accentColor: Colors.lightBlueAccent,
     backgroundColor: Colors.white,
     
   );

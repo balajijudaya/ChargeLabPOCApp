@@ -36,11 +36,6 @@ class _VerificationPageState extends State<VerificationPage> {
             width: 64,
           )),
         ),
-        BrandMessage(
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
         Text(
           "A verification code has been sent to your email."
         ),
