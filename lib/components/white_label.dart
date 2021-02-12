@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 
 /*
-  
+  Custom Brand Logo
 */
 class BrandLogo extends StatelessWidget {
   final double width;
@@ -27,7 +27,7 @@ class BrandLogo extends StatelessWidget {
 }
 
 /*
-
+  Custom Brand Message
 */
 class BrandMessage extends StatelessWidget {
   final TextStyle style;
@@ -44,7 +44,7 @@ class BrandMessage extends StatelessWidget {
 }
 
 /*
-  Brand Themes
+  Custom Brand Theme
 */
 ThemeData brandTheme() {
   return ThemeData(
@@ -56,3 +56,8 @@ ThemeData brandTheme() {
     
   );
 }
+
+
+/*
+  Custom Brand Splash Screen
+*/

@@ -89,7 +89,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     );
   }
 
-  // Configures amplify
+  // Configure amplify with Auth plugin
   void _configureAmplify() async {
     _amplify.addPlugin(AmplifyAuthCognito());
 

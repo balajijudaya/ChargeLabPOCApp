@@ -1,3 +1,4 @@
+import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,6 +12,10 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF18a1d7),
         title: Text("Home Screen"),
+        leading: GestureDetector(
+          child: Icon(Icons.menu),
+          onTap: () {},
+        ),
         actions: [
           // Log out button
           Padding(
@@ -25,7 +30,10 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 40),
         child: Center(
-          child: Text("Home Screen"),
+          child: BrandLogo(
+            width: 64,
+            height: 64
+          ),
         ),
       )
     );
