@@ -63,12 +63,22 @@ class _SignUpPageState extends State<SignUpPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Username text field
-          TextField(
+          TextFormField(
             controller: _usernameController,
             decoration: InputDecoration(
               icon: Icon(Icons.person),
               labelText: "Username",
             ),
+            validator: (String value) {
+              // Valid chars, username must be alphanumeric
+              final validChars = RegExp(r'^[a-zA-Z0-9]+$');
+
+              if (value.isEmpty || !validChars.hasMatch(value)) {
+                return "Invalid username. Must be alphanumeric";
+              } else {
+                return null;
+              }
+            },
           ),
 
           // Email text field
@@ -90,12 +100,15 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
 
           // Password text field
-          TextField(
+          TextFormField(
             controller: _passwordController,
             decoration: InputDecoration(
               icon: Icon(Icons.lock_open),
               labelText: "Password (8-16 chars)",
             ),
+            validator: (String value) {
+              
+            },
           ),
 
           // Sign up button
