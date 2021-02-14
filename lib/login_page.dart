@@ -53,7 +53,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 
-
   Widget _loginForm() {
     return Form(
       key: widget._formKey,
@@ -69,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             validator: (String value) {
               // Valid chars, username must be alphanumeric
-              final validChars = RegExp(r'^[a-zA-Z0-9]+$');
+              final validChars = RegExp(r"^[a-zA-Z0-9]+$");
 
               if (value.isEmpty || !validChars.hasMatch(value)) {
                 return "Invalid username. Must be alphanumeric";

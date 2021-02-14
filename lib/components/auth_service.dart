@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:ChargeLabPoCApp/components/auth_credentials.dart';
+import 'package:ChargeLabPoCApp/signup_page.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
-import 'package:flutter/material.dart';
 
 enum AuthFlowStatus {
   login,
@@ -54,7 +54,6 @@ class AuthService {
       }
     } on AuthException catch (authError) {
       print("Could not login user - ${authError.message}");
-      
     }
 
   }
@@ -128,5 +127,6 @@ class AuthService {
       authStateController.add(state);
     }
   }
+
 
 }
