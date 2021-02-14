@@ -61,15 +61,6 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Username field
-          /*
-          TextField(
-            controller: _usernameController,
-            decoration: InputDecoration(
-              icon: Icon(Icons.mail),
-              labelText: "Username",
-            ),
-          ),
-          */
           TextFormField(
             controller: _usernameController,
             decoration: InputDecoration(
@@ -77,9 +68,9 @@ class _LoginPageState extends State<LoginPage> {
               labelText: "Username",
             ),
             validator: (String value) {
-              //return value.contains(new RegExp(r"/^[a-zA-Z][a-zA-Z\d-_\.]+$/")) 
-              //  ? "Invalid username. First char must be a letter" : null;
+              // Valid chars, username must be alphanumeric
               final validChars = RegExp(r'^[a-zA-Z0-9]+$');
+
               if (value.isEmpty || !validChars.hasMatch(value)) {
                 return "Invalid username. Must be alphanumeric";
               } else {
@@ -89,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
             
           ),
           // Password field
-          TextField(
+          TextFormField(
             controller: _passwordController,
             decoration: InputDecoration(
               icon: Icon(Icons.lock_open),
@@ -97,6 +88,17 @@ class _LoginPageState extends State<LoginPage> {
             ),
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
+            validator: (String value) {
+              // Must conain min eight chars, min one letter, and one number
+              final validPass = RegExp(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
+
+              // TODO: Test
+              if (value.isEmpty || !validPass.hasMatch(value)) {
+                return "Must contain min 8 chars and a number";
+              } else {
+                return null;
+              }
+            },
           ),
           // Login Button
           FlatButton(
@@ -111,9 +113,9 @@ class _LoginPageState extends State<LoginPage> {
 
 
   void _login() {
+    widget._formKey.currentState.validate();
     final username = _usernameController.text.trim();
     final password = _passwordController.text.trim();
-    widget._formKey.currentState.validate();
 
     print("username: $username\npassword: $password\n");
 
@@ -123,14 +125,6 @@ class _LoginPageState extends State<LoginPage> {
       password: password
     );
     widget.didProvideCredentials(credentials);
-  }
-
-
-  String validatePassword(String value) {
-    if (!(value.length >= 8) && value.isNotEmpty) {
-      return "Password must contain more than 8 characters.";
-    }
-    return null;
   }
   
 }
