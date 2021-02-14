@@ -3,6 +3,7 @@ import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final ValueChanged<LogInCredentials> didProvideCredentials;
   // Triggered to show signup page for new users
   final VoidCallback shouldShowSignUp;
@@ -54,48 +55,57 @@ class _LoginPageState extends State<LoginPage> {
 
 
   Widget _loginForm() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Username field
-        /*
-        TextField(
-          controller: _usernameController,
-          decoration: InputDecoration(
-            icon: Icon(Icons.mail),
-            labelText: "Username",
+    return Form(
+      key: widget._formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Username field
+          /*
+          TextField(
+            controller: _usernameController,
+            decoration: InputDecoration(
+              icon: Icon(Icons.mail),
+              labelText: "Username",
+            ),
           ),
-        ),
-        */
-        TextFormField(
-          controller: _usernameController,
-          decoration: InputDecoration(
-            icon: Icon(Icons.person),
-            labelText: "Username",
+          */
+          TextFormField(
+            controller: _usernameController,
+            decoration: InputDecoration(
+              icon: Icon(Icons.person),
+              labelText: "Username",
+            ),
+            validator: (String value) {
+              //return value.contains(new RegExp(r"/^[a-zA-Z][a-zA-Z\d-_\.]+$/")) 
+              //  ? "Invalid username. First char must be a letter" : null;
+              final validChars = RegExp(r'^[a-zA-Z0-9]+$');
+              if (value.isEmpty || !validChars.hasMatch(value)) {
+                return "Invalid username. Must be alphanumeric";
+              } else {
+                return null;
+              }
+            },
+            
           ),
-          validator: (String value) {
-            return value.contains(new RegExp(r"/^[a-zA-Z][a-zA-Z\d-_\.]+$/")) 
-              ? "Invalid username. First char must be a letter" : null;
-          },
-          
-        ),
-        // Password field
-        TextField(
-          controller: _passwordController,
-          decoration: InputDecoration(
-            icon: Icon(Icons.lock_open),
-            labelText: "Password",
+          // Password field
+          TextField(
+            controller: _passwordController,
+            decoration: InputDecoration(
+              icon: Icon(Icons.lock_open),
+              labelText: "Password",
+            ),
+            obscureText: true,
+            keyboardType: TextInputType.visiblePassword,
           ),
-          obscureText: true,
-          keyboardType: TextInputType.visiblePassword,
-        ),
-        // Login Button
-        FlatButton(
-          onPressed: _login,
-          child: Text("Login"),
-          color: Theme.of(context).accentColor,
-        ),
-      ]
+          // Login Button
+          FlatButton(
+            onPressed: _login,
+            child: Text("Login"),
+            color: Theme.of(context).accentColor,
+          ),
+        ]
+      ),
     );
   }
 
@@ -103,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
   void _login() {
     final username = _usernameController.text.trim();
     final password = _passwordController.text.trim();
+    widget._formKey.currentState.validate();
 
     print("username: $username\npassword: $password\n");
 
