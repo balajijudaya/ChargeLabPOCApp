@@ -22,24 +22,21 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 40),
-        child: Stack(children: [
-          Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 80),
-                child: Center(child: BrandLogo(
-                  height: 64,
-                  width: 64,
-                )),
-              ),
-              BrandMessage(
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Padding(padding: EdgeInsets.only(bottom: 25)),
-            ],
+        child: Column(children: [
+          Padding(
+            padding: EdgeInsets.only(top: 80),
+            child: Center(child: BrandLogo(
+              height: 64,
+              width: 64,
+            )),
           ),
+          BrandMessage(
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 90)),
+        
           _loginForm(),
           // Sign up button
           Container(
@@ -61,12 +58,26 @@ class _LoginPageState extends State<LoginPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Username field
+        /*
         TextField(
           controller: _usernameController,
           decoration: InputDecoration(
             icon: Icon(Icons.mail),
             labelText: "Username",
           ),
+        ),
+        */
+        TextFormField(
+          controller: _usernameController,
+          decoration: InputDecoration(
+            icon: Icon(Icons.person),
+            labelText: "Username",
+          ),
+          validator: (String value) {
+            return value.contains(new RegExp(r"/^[a-zA-Z][a-zA-Z\d-_\.]+$/")) 
+              ? "Invalid username. First char must be a letter" : null;
+          },
+          
         ),
         // Password field
         TextField(
@@ -102,5 +113,14 @@ class _LoginPageState extends State<LoginPage> {
     );
     widget.didProvideCredentials(credentials);
   }
+
+
+  String validatePassword(String value) {
+    if (!(value.length >= 8) && value.isNotEmpty) {
+      return "Password must contain more than 8 characters.";
+    }
+    return null;
+  }
+  
 }
 

@@ -23,8 +23,22 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 40),
-        child: Stack(
+        child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.only(top: 80),
+              child: Center(child: BrandLogo(
+                height: 64,
+                width: 64,
+              )),
+            ),
+            BrandMessage(
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(bottom: 90)),
+          
             // Sign up form
             _signUpForm(),
             // Log in button
@@ -45,19 +59,6 @@ class _SignUpPageState extends State<SignUpPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Center(child: BrandLogo(
-            height: 64,
-            width: 64,
-          ),
-        ),
-        BrandMessage(
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 100),
-        ),
         // Username text field
         TextField(
           controller: _usernameController,
