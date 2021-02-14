@@ -112,18 +112,20 @@ class _LoginPageState extends State<LoginPage> {
 
 
   void _login() {
-    widget._formKey.currentState.validate();
-    final username = _usernameController.text.trim();
-    final password = _passwordController.text.trim();
+    if (widget._formKey.currentState.validate()) {
+      final username = _usernameController.text.trim();
+      final password = _passwordController.text.trim();
 
-    print("username: $username\npassword: $password\n");
+      print("username: $username\npassword: $password\n");
 
-    // Create and pass the credentials
-    final credentials = LogInCredentials(
-      username: username,
-      password: password
-    );
-    widget.didProvideCredentials(credentials);
+      // Create and pass the credentials
+      final credentials = LogInCredentials(
+        username: username,
+        password: password
+      );
+      widget.didProvideCredentials(credentials);
+
+    }
   }
   
 }

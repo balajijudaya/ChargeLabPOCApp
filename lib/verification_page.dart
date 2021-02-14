@@ -20,7 +20,22 @@ class _VerificationPageState extends State<VerificationPage> {
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 40),
-        child: _verificationForm(),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 90, bottom: 80),
+              child: Center(child: BrandLogo(
+                height: 64,
+                width: 64,
+              )),
+            ),
+            Text(
+              "A verification code has been sent to your email."
+            ),
+            Padding(padding: EdgeInsets.only(top: 10),),
+            _verificationForm(),
+          ],
+        ),
       ),
     );
   }
@@ -29,17 +44,6 @@ class _VerificationPageState extends State<VerificationPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: EdgeInsets.only(top: 100),
-          child: Center(child: BrandLogo(
-            height: 64,
-            width: 64,
-          )),
-        ),
-        Text(
-          "A verification code has been sent to your email."
-        ),
-
         // Verification code text field
         TextField(
           controller: _verificationCodeController,
@@ -53,7 +57,8 @@ class _VerificationPageState extends State<VerificationPage> {
           onPressed: _verify,
           child: Text("Verify"),
           color: Theme.of(context).accentColor,
-        )
+        ),
+        Padding(padding: EdgeInsets.only(bottom: 0),),
       ]
     );
   }

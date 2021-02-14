@@ -34,6 +34,6 @@ flutter build apk --split-per-abi --release
    ```
 
 #### Test Credentials
-username: jonathanl
+username: example
 
-password: testtest
+password: testPassword9

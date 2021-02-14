@@ -130,20 +130,22 @@ class _SignUpPageState extends State<SignUpPage> {
 
 
   void _signUp() {
-    widget._formKey.currentState.validate();
-    final username = _usernameController.text.trim();
-    final email = _emailController.text.trim();
-    final password = _passwordController.text.trim();
+    if (widget._formKey.currentState.validate()) {
+      final username = _usernameController.text.trim();
+      final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
 
-    print("username: $username\nemail: $email\npassword: $password\n");
+      print("username: $username\nemail: $email\npassword: $password\n");
 
-    // Create and pass the credentials
-    final credentials = SignUpCredentials(
-      username: username,
-      email: email,
-      password: password,
-    );
-    widget.didProvideCredentials(credentials);
+      // Create and pass the credentials
+      final credentials = SignUpCredentials(
+        username: username,
+        email: email,
+        password: password,
+      );
+      widget.didProvideCredentials(credentials);
+
+    }
 
   }
 
