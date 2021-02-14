@@ -72,6 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
             validator: (String value) {
               // Valid chars, username must be alphanumeric
               final validChars = RegExp(r"^[a-zA-Z0-9]+$");
+              
               if (value.isEmpty || !validChars.hasMatch(value)) {
                 return "Invalid username. Must be alphanumeric";
               } else {
@@ -88,8 +89,8 @@ class _SignUpPageState extends State<SignUpPage> {
               labelText: "Email",
             ),
             validator: (String value) {
-              // TODO: Needs Fixing
               final validEmail = RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+              
               if (value.isEmpty || !validEmail.hasMatch(value)) {
                 return "Invalid email format";
               } else {
@@ -108,7 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
             validator: (String value) {
               // Must conain min eight chars, min one letter, and one number
               final validPass = RegExp(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
-              // TODO: Test
+              
               if (value.isEmpty || !validPass.hasMatch(value)) {
                 return "Must contain min 8 chars and a number";
               } else {

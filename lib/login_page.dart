@@ -90,8 +90,7 @@ class _LoginPageState extends State<LoginPage> {
             validator: (String value) {
               // Must conain min eight chars, min one letter, and one number
               final validPass = RegExp(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
-
-              // TODO: Test
+              
               if (value.isEmpty || !validPass.hasMatch(value)) {
                 return "Must contain min 8 chars and a number";
               } else {
