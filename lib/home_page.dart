@@ -1,10 +1,26 @@
 import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/io.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  // Open websocket connection on test server
+  final channel = IOWebSocketChannel.connect("ws://echo.websocket.org");
   final VoidCallback shouldLogOut;
 
   HomePage({Key key, this.shouldLogOut}) : super(key: key);
+  
+  
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  @override
+  void dispose() {
+    widget.channel.sink.close();  // Close web socket connection
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +38,37 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: GestureDetector(
               child: Icon(Icons.logout),
-              onTap: shouldLogOut,
+              onTap: widget.shouldLogOut,
             ),
           )
         ],
       ),
       body: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 40),
-        child: Center(
-          child: BrandLogo(
-            width: 64,
-            height: 64
-          ),
-        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top:48.0),
+              child: BrandLogo(
+                width: 64,
+                height: 64
+              ),
+            ),
+            // Stream builder with websocket stream
+            StreamBuilder(
+              stream: widget.channel.stream,
+              builder: (context, snapshot) {
+                return Text(snapshot.hasData ? "${snapshot.data}" : "");
+              }
+            ),
+            FlatButton(
+              child: Icon(Icons.message),
+              onPressed: () {
+                widget.channel.sink.add("Brand ID");
+              },
+            )
+          ],
+        )
       )
     );
   }
