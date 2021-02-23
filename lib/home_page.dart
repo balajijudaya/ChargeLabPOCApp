@@ -1,6 +1,7 @@
 import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/io.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class HomePage extends StatefulWidget {
   // Open websocket connection on test server
@@ -20,6 +21,12 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     widget.channel.sink.close();  // Close web socket connection
     super.dispose();
+  }
+
+  @override
+  void initState() { 
+    
+    super.initState();
   }
 
   @override
@@ -72,4 +79,5 @@ class _HomePageState extends State<HomePage> {
       )
     );
   }
+
 }
