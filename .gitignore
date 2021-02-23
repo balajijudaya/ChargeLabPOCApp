@@ -58,3 +58,7 @@ amplifytools.xcconfig
 
 amplify/
 **/amplifyconfiguration.dart
+
+
+# Firebase/Google Services
+android/app/google-services.json
