@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:ChargeLabPoCApp/amplifyconfiguration.dart';
 import 'package:ChargeLabPoCApp/components/white_label.dart';
+import 'package:ChargeLabPoCApp/components/whitelabel.dart';
 import 'package:ChargeLabPoCApp/login_page.dart';
 import 'package:ChargeLabPoCApp/page_flow.dart';
 import 'package:ChargeLabPoCApp/signup_page.dart';
@@ -44,6 +45,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   final _authService = AuthService();
   DatabaseReference _brandsRef;
   StreamSubscription<Event> _dbSubscription;
+  WhiteLabel _whiteLabel;
 
   @override
   void initState() {
@@ -55,9 +57,12 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     //Config database directly
     final FirebaseDatabase database = FirebaseDatabase(app: widget.app);
     _brandsRef = database.reference().child('BrandID');
-    _brandsRef.child('ChargeLab').once().then((DataSnapshot snapshot) {
+    _brandsRef.once().then((DataSnapshot snapshot) {
       print('Connected to database and read ${snapshot.value}');
+
+      _whiteLabel = WhiteLabel.fromJson(snapshot.value);
     });
+
 
     // Keep database in sync & cache synched data
     database.setPersistenceEnabled(true);
@@ -68,8 +73,18 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
       setState(() {
         
       });
+
+    
     });
   }
+
+  @override
+  void dispose() {
+    // Close Database stream subscription
+    _dbSubscription.cancel();
+    super.dispose();
+  }
+
 
 
   @override
@@ -112,6 +127,8 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                     LoginPage(
                       shouldShowSignUp: _authService.showSignUp,
                       didProvideCredentials: _authService.loginWithCredentials,
+                      whiteLabel: _whiteLabel,
+                      dbRef: _brandsRef,
                     )
                   ),
               ],

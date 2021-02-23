@@ -1,14 +1,26 @@
+import 'dart:async';
+
 import 'package:ChargeLabPoCApp/components/auth_credentials.dart';
 import 'package:ChargeLabPoCApp/components/white_label.dart';
+import 'package:ChargeLabPoCApp/components/whitelabel.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class LoginPage extends StatefulWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final ValueChanged<LogInCredentials> didProvideCredentials;
   // Triggered to show signup page for new users
   final VoidCallback shouldShowSignUp;
+  final WhiteLabel whiteLabel;
+  final DatabaseReference dbRef;
 
-  LoginPage({Key key, this.didProvideCredentials, this.shouldShowSignUp}) : super(key: key);
+  LoginPage({
+    Key key, 
+    this.didProvideCredentials, 
+    this.shouldShowSignUp, 
+    this.whiteLabel,
+    this.dbRef
+  }) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -30,6 +42,23 @@ class _LoginPageState extends State<LoginPage> {
               height: 64,
               width: 64,
             )),
+          ),
+          //Text(widget.whiteLabel.brandId.chargeLab.supportPhone),
+          StreamBuilder(
+            stream: widget.dbRef.onValue,
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              if (!snapshot.hasData) {
+                return CircularProgressIndicator(backgroundColor: Colors.blue);
+              }
+
+              return Text(
+                snapshot.data.toString(),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            }
+
           ),
           BrandMessage(
             style: TextStyle(
