@@ -46,6 +46,9 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   DatabaseReference _brandsRef;
   StreamSubscription<Event> _dbSubscription;
   WhiteLabel _whiteLabel;
+  // Brand ID to fetch brand specific assets from Firebase RTDB
+  static const String _brandID = 'ChargeLab';
+  ChargeLab _chargeLab;
 
   @override
   void initState() {
@@ -54,16 +57,24 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     _authService.showLogin();
     //_authService.checkAuthStatus();
 
-    //Config database directly
+    getBrandAssets();
+    
+  }
+
+
+  getBrandAssets() async {
+    if (_brandID == 'ChargeLab') {
+      //Config database directly
     final FirebaseDatabase database = FirebaseDatabase(app: widget.app);
     _brandsRef = database.reference().child('BrandID');
     _brandsRef.once().then((DataSnapshot snapshot) {
       print('Connected to database and read ${snapshot.value}');
-
-      _whiteLabel = WhiteLabel.fromJson(snapshot.value);
+      setState(() {
+        _whiteLabel = WhiteLabel.fromJson(snapshot.value);
+        
+      });
     });
-
-
+    
     // Keep database in sync & cache synched data
     database.setPersistenceEnabled(true);
     database.setPersistenceCacheSizeBytes(1000000000);
@@ -71,11 +82,16 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
 
     _dbSubscription = _brandsRef.onValue.listen((event) {
       setState(() {
-        
+        _chargeLab = _whiteLabel.brandId.chargeLab;
       });
 
     
     });
+
+
+    } else if (_brandID == 'TestBrand') {
+
+    }
   }
 
   @override
@@ -84,7 +100,6 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     _dbSubscription.cancel();
     super.dispose();
   }
-
 
 
   @override

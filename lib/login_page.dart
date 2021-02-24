@@ -13,13 +13,15 @@ class LoginPage extends StatefulWidget {
   final VoidCallback shouldShowSignUp;
   final WhiteLabel whiteLabel;
   final DatabaseReference dbRef;
+  final ChargeLab chargeLab;
 
   LoginPage({
     Key key, 
     this.didProvideCredentials, 
     this.shouldShowSignUp, 
     this.whiteLabel,
-    this.dbRef
+    this.dbRef,
+    this.chargeLab,
   }) : super(key: key);
 
   @override
@@ -43,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               width: 64,
             )),
           ),
-          //Text(widget.whiteLabel.brandId.chargeLab.supportPhone),
+          Text(widget.chargeLab.supportPhone),
           StreamBuilder(
             stream: widget.dbRef.onValue,
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -52,7 +54,8 @@ class _LoginPageState extends State<LoginPage> {
               }
 
               return Text(
-                snapshot.data.toString(),
+                snapshot.hasData ? snapshot.data.toString() : "No data :(",
+                //widget.whiteLabel.brandId.chargeLab.supportPhone,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
