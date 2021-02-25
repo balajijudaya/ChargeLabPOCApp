@@ -16,9 +16,9 @@ dependencies:
   amplify_flutter: '<1.0.0'
   amplify_auth_cognito: '<1.0.0'
   flutter_svg: ^0.19.1
-  web_socket_channel: ^1.2.0
   firebase: ^8.0.0
   firebase_database: ^6.0.0
+  
 
 dev_dependencies:
   flutter_test:

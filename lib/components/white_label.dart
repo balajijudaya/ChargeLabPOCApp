@@ -72,8 +72,3 @@ ThemeData brandTheme() {
     
   );
 }
-
-
-/*
-  Custom Brand Splash Screen
-*/
