@@ -1,10 +1,6 @@
-import 'dart:async';
-
 import 'package:ChargeLabPoCApp/components/auth_credentials.dart';
 import 'package:ChargeLabPoCApp/components/white_label.dart';
-import 'package:ChargeLabPoCApp/components/whitelabel.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class LoginPage extends StatefulWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

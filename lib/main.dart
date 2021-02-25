@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:collection';
-import 'dart:convert';
 import 'package:ChargeLabPoCApp/amplifyconfiguration.dart';
 import 'package:ChargeLabPoCApp/components/white_label.dart';
-import 'package:ChargeLabPoCApp/components/whitelabel.dart';
 import 'package:ChargeLabPoCApp/login_page.dart';
 import 'package:ChargeLabPoCApp/page_flow.dart';
 import 'package:ChargeLabPoCApp/signup_page.dart';
@@ -47,8 +44,6 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   final _authService = AuthService();
   DatabaseReference _brandsRef;
   StreamSubscription<Event> _dbSubscription;
-  
-  WhiteLabel _whiteLabel;
   PartnerBrand _partnerBrand;
   // Brand ID to fetch brand specific assets from Firebase RTDB
   static const String _brandID = 'ChargeLab';
