@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
     Key key, 
     this.didProvideCredentials, 
     this.shouldShowSignUp, 
-    this.partnerBrand,
+    @required this.partnerBrand,
   }) : super(key: key);
 
   @override

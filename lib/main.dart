@@ -139,13 +139,16 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                     SignUpPage(
                       shouldShowLogin: _authService.showLogin,
                       didProvideCredentials: _authService.signUpWithCredentials,
+                      partnerBrand: _partnerBrand,
                       )
                     ),
 
                 // Show verification code page
                 if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
                   MaterialPage(child: 
-                    VerificationPage(didProvideVerificationCode: _authService.verifyCode
+                    VerificationPage(
+                      didProvideVerificationCode: _authService.verifyCode,
+                      partnerBrand: _partnerBrand,
                     )
                   ),
 

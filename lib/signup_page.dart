@@ -7,8 +7,14 @@ class SignUpPage extends StatefulWidget {
   final ValueChanged<SignUpCredentials> didProvideCredentials;
   // Triggered to show login page from sign up
   final VoidCallback shouldShowLogin;
+  final PartnerBrand partnerBrand;
 
-  SignUpPage({Key key, this.didProvideCredentials, this.shouldShowLogin}) : super(key: key);
+  SignUpPage({
+    Key key,
+    this.didProvideCredentials,
+    this.shouldShowLogin,
+    @required this.partnerBrand,
+  }) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -33,9 +39,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 width: 64,
               )),
             ),
-            BrandMessage(
+            Text(
+              widget.partnerBrand.greetMsg != null ? widget.partnerBrand.greetMsg : "",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              widget.partnerBrand.supportPhone != null ? widget.partnerBrand.supportPhone : "",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12
               ),
             ),
             Padding(padding: EdgeInsets.only(bottom: 90)),
