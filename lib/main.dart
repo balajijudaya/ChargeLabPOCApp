@@ -45,21 +45,21 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   DatabaseReference _brandsRef;
   StreamSubscription<Event> _dbSubscription;
   PartnerBrand _partnerBrand;
-  // Brand ID to fetch brand specific assets from Firebase RTDB
-  static const String _brandID = 'ChargeLab';
   var _brand;
+  // Brand ID to fetch brand specific assets from Firebase RTDB
+  static const String _brandID = 'ChargeLab'; // Change for each partner brand's build
 
   @override
   void initState() {
-    super.initState();
-    _configureAmplify();
     getBrandAssets();
+    _configureAmplify();
     _authService.showLogin();
     //_authService.checkAuthStatus();    
+    super.initState();
   }
 
 
-  getBrandAssets() async {
+  getBrandAssets() {
     if (_brandID == 'ChargeLab') {
       //Config database directly
     final FirebaseDatabase database = FirebaseDatabase(app: widget.app);
@@ -73,7 +73,11 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
         _partnerBrand = new PartnerBrand(
           greetMsg: _brand['greetMsg'],
           logo: _brand['logo'],
-          supportPhone: _brand['supportPhone']
+          supportPhone: _brand['supportPhone'],
+          brandTheme: ThemeData(
+            primaryColor: Color(int.parse(_brand['primaryColour'])),
+            accentColor: Color(int.parse(_brand['secondaryColour']))
+          ),
         );
       });
     });

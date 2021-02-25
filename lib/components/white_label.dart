@@ -7,15 +7,18 @@ import 'package:flutter/material.dart';
 
 
 class PartnerBrand {
-  PartnerBrand({
-      @required this.greetMsg,
-      @required this.logo,
-      @required this.supportPhone,
-  });
-
   final String greetMsg;
   final String logo;
   final String supportPhone;
+  final ThemeData brandTheme;
+
+  PartnerBrand({
+      @required this.greetMsg,
+      @required this.logo,
+      this.supportPhone,
+      this.brandTheme,
+  });
+
 }
 
 /*
