@@ -37,10 +37,17 @@ class _LoginPageState extends State<LoginPage> {
               width: 64,
             )),
           ),
-          Text(widget.partnerBrand.supportPhone != null ? widget.partnerBrand.supportPhone : ""),
-          BrandMessage(
+          Text(
+            widget.partnerBrand.greetMsg != null ? widget.partnerBrand.greetMsg : "",
             style: TextStyle(
               fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            widget.partnerBrand.supportPhone != null ? widget.partnerBrand.supportPhone : "",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12
             ),
           ),
           Padding(padding: EdgeInsets.only(bottom: 90)),

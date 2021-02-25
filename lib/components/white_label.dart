@@ -2,21 +2,22 @@
   File containing all the definitions for messages, logos, etc., for easy and quick
   brand specific app customization all in one place.
 */
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 
 
 class PartnerBrand {
   final String greetMsg;
-  final String logo;
+  final CachedNetworkImage logo;
   final String supportPhone;
   final ThemeData brandTheme;
 
   PartnerBrand({
       @required this.greetMsg,
       @required this.logo,
-      this.supportPhone,
-      this.brandTheme,
+      @required this.supportPhone,
+      @required this.brandTheme,
   });
 
 }

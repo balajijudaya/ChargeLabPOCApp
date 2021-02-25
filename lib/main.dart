@@ -8,6 +8,7 @@ import 'package:ChargeLabPoCApp/components/auth_service.dart';
 import 'package:ChargeLabPoCApp/verification_page.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -46,8 +47,12 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   StreamSubscription<Event> _dbSubscription;
   PartnerBrand _partnerBrand;
   var _brand;
-  // Brand ID to fetch brand specific assets from Firebase RTDB
-  static const String _brandID = 'ChargeLab'; // Change for each partner brand's build
+  /*
+  Brand ID to fetch brand specific assets from Firebase RTDB
+  Must match BrandID in Database
+  Change to match partner's app build to fetch appropriate assets
+  */
+  static const String _brandID = 'ChargeLab';
 
   @override
   void initState() {
@@ -60,19 +65,24 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
 
 
   getBrandAssets() {
-    if (_brandID == 'ChargeLab') {
-      //Config database directly
+    //Config database directly
     final FirebaseDatabase database = FirebaseDatabase(app: widget.app);
     _brandsRef = database.reference().child('BrandID');
     _brandsRef.once().then((DataSnapshot snapshot) {
       print('Connected to database and read ${snapshot.value}');
-      _brand = snapshot.value['ChargeLab'];
+      _brand = snapshot.value[_brandID];
 
       setState(() {
         // Instantiate PartnerBrand Obj with partner specific info
         _partnerBrand = new PartnerBrand(
           greetMsg: _brand['greetMsg'],
-          logo: _brand['logo'],
+          logo: CachedNetworkImage(
+            imageUrl: _brand['logo'],
+            progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(
+              value: downloadProgress.progress,
+            ),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
           supportPhone: _brand['supportPhone'],
           brandTheme: ThemeData(
             primaryColor: Color(int.parse(_brand['primaryColour'])),
@@ -95,10 +105,6 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     
     });
 
-
-    } else if (_brandID == 'TestBrand') {
-
-    }
   }
 
   @override
