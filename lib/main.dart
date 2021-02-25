@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:collection';
+import 'dart:convert';
 import 'package:ChargeLabPoCApp/amplifyconfiguration.dart';
 import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:ChargeLabPoCApp/components/whitelabel.dart';
@@ -45,20 +47,20 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   final _authService = AuthService();
   DatabaseReference _brandsRef;
   StreamSubscription<Event> _dbSubscription;
+  
   WhiteLabel _whiteLabel;
+  PartnerBrand _partnerBrand;
   // Brand ID to fetch brand specific assets from Firebase RTDB
   static const String _brandID = 'ChargeLab';
-  ChargeLab _chargeLab;
+  var _brand;
 
   @override
   void initState() {
     super.initState();
     _configureAmplify();
-    _authService.showLogin();
-    //_authService.checkAuthStatus();
-
     getBrandAssets();
-    
+    _authService.showLogin();
+    //_authService.checkAuthStatus();    
   }
 
 
@@ -69,9 +71,15 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     _brandsRef = database.reference().child('BrandID');
     _brandsRef.once().then((DataSnapshot snapshot) {
       print('Connected to database and read ${snapshot.value}');
+      _brand = snapshot.value['ChargeLab'];
+
       setState(() {
-        _whiteLabel = WhiteLabel.fromJson(snapshot.value);
-        
+        // Instantiate PartnerBrand Obj with partner specific info
+        _partnerBrand = new PartnerBrand(
+          greetMsg: _brand['greetMsg'],
+          logo: _brand['logo'],
+          supportPhone: _brand['supportPhone']
+        );
       });
     });
     
@@ -80,9 +88,9 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     database.setPersistenceCacheSizeBytes(1000000000);
     _brandsRef.keepSynced(true);
 
+    // TODO: Maybe Axe
     _dbSubscription = _brandsRef.onValue.listen((event) {
       setState(() {
-        _chargeLab = _whiteLabel.brandId.chargeLab;
       });
 
     
@@ -96,7 +104,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
 
   @override
   void dispose() {
-    // Close Database stream subscription
+    // Close Database stream subscription TODO: Axe if Axed above subscription
     _dbSubscription.cancel();
     super.dispose();
   }
@@ -142,8 +150,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                     LoginPage(
                       shouldShowSignUp: _authService.showSignUp,
                       didProvideCredentials: _authService.loginWithCredentials,
-                      whiteLabel: _whiteLabel,
-                      dbRef: _brandsRef,
+                      partnerBrand: _partnerBrand,
                     )
                   ),
               ],

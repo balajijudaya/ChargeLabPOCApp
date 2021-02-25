@@ -11,17 +11,13 @@ class LoginPage extends StatefulWidget {
   final ValueChanged<LogInCredentials> didProvideCredentials;
   // Triggered to show signup page for new users
   final VoidCallback shouldShowSignUp;
-  final WhiteLabel whiteLabel;
-  final DatabaseReference dbRef;
-  final ChargeLab chargeLab;
+  final PartnerBrand partnerBrand;
 
   LoginPage({
     Key key, 
     this.didProvideCredentials, 
     this.shouldShowSignUp, 
-    this.whiteLabel,
-    this.dbRef,
-    this.chargeLab,
+    this.partnerBrand,
   }) : super(key: key);
 
   @override
@@ -45,24 +41,7 @@ class _LoginPageState extends State<LoginPage> {
               width: 64,
             )),
           ),
-          Text(widget.chargeLab.supportPhone),
-          StreamBuilder(
-            stream: widget.dbRef.onValue,
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (!snapshot.hasData) {
-                return CircularProgressIndicator(backgroundColor: Colors.blue);
-              }
-
-              return Text(
-                snapshot.hasData ? snapshot.data.toString() : "No data :(",
-                //widget.whiteLabel.brandId.chargeLab.supportPhone,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              );
-            }
-
-          ),
+          Text(widget.partnerBrand.supportPhone != null ? widget.partnerBrand.supportPhone : ""),
           BrandMessage(
             style: TextStyle(
               fontWeight: FontWeight.bold,
