@@ -32,10 +32,15 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(children: [
           Padding(
             padding: EdgeInsets.only(top: 80),
-            child: Center(child: BrandLogo(
-              height: 64,
-              width: 64,
-            )),
+            child: Center(
+              child: widget.partnerBrand.logo
+              /*  
+                child: BrandLogo(
+                height: 64,
+                width: 64,
+              )
+              */
+            ),
           ),
           Text(
             widget.partnerBrand.greetMsg != null ? widget.partnerBrand.greetMsg : "",

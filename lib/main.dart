@@ -77,6 +77,8 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
         _partnerBrand = new PartnerBrand(
           greetMsg: _brand['greetMsg'],
           logo: CachedNetworkImage(
+            width: 64,
+            height: 64,
             imageUrl: _brand['logo'],
             progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(
               value: downloadProgress.progress,
