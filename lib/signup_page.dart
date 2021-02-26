@@ -33,11 +33,10 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 80),
-              child: Center(child: BrandLogo(
-                height: 64,
-                width: 64,
-              )),
+              padding: EdgeInsets.only(top: 5),
+              child: Center(
+                child: widget.partnerBrand.logo,
+              ),
             ),
             Text(
               widget.partnerBrand.greetMsg != null ? widget.partnerBrand.greetMsg : "",
@@ -52,9 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 fontSize: 12
               ),
             ),
-            Padding(padding: EdgeInsets.only(bottom: 90)),
-          
-            // Sign up form
+            Padding(padding: EdgeInsets.only(bottom: 60)),
             _signUpForm(),
             // Log in button
             Container(

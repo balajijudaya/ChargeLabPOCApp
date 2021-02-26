@@ -31,15 +31,9 @@ class _LoginPageState extends State<LoginPage> {
         minimum: EdgeInsets.symmetric(horizontal: 40),
         child: Column(children: [
           Padding(
-            padding: EdgeInsets.only(top: 80),
+            padding: EdgeInsets.only(top: 5),
             child: Center(
               child: widget.partnerBrand.logo
-              /*  
-                child: BrandLogo(
-                height: 64,
-                width: 64,
-              )
-              */
             ),
           ),
           Text(
@@ -55,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
               fontSize: 12
             ),
           ),
-          Padding(padding: EdgeInsets.only(bottom: 90)),
+          Padding(padding: EdgeInsets.only(bottom: 60)),
         
           _loginForm(),
           // Sign up button

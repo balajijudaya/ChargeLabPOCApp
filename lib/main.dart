@@ -56,6 +56,8 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
 
   @override
   void initState() {
+
+
     getBrandAssets();
     _configureAmplify();
     _authService.showLogin();
@@ -77,8 +79,8 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
         _partnerBrand = new PartnerBrand(
           greetMsg: _brand['greetMsg'],
           logo: CachedNetworkImage(
-            width: 64,
-            height: 64,
+            width: 256,
+            height: 180,
             imageUrl: _brand['logo'],
             progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(
               value: downloadProgress.progress,
@@ -131,7 +133,9 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
                 // Show App Pages
                 if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
                   MaterialPage(child: 
-                    PageFlow(shouldLogOut: _authService.logOut
+                    PageFlow(
+                      shouldLogOut: _authService.logOut,
+                      partnerBrand: _partnerBrand,
                     )
                   ),
 

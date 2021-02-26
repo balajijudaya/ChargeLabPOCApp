@@ -25,10 +25,15 @@ class _VerificationPageState extends State<VerificationPage> {
           children: [
             Padding(
               padding: EdgeInsets.only(top: 90, bottom: 80),
-              child: Center(child: BrandLogo(
-                height: 64,
-                width: 64,
-              )),
+              child: Center(
+                child: widget.partnerBrand.logo
+                /*  
+                  child: BrandLogo(
+                  height: 64,
+                  width: 64,
+                )
+                */
+              ),
             ),
             Text(
               "A verification code has been sent to your email."

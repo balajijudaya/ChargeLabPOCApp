@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   final VoidCallback shouldLogOut;
+  final PartnerBrand partnerBrand;
 
-  HomePage({Key key, this.shouldLogOut}) : super(key: key);
+  HomePage({Key key, this.shouldLogOut, this.partnerBrand}) : super(key: key);
   
   
   @override
@@ -45,10 +46,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top:48.0),
-              child: BrandLogo(
-                width: 64,
-                height: 64
-              ),
+              child: widget.partnerBrand.logo
+            
+            
             ),
             
           ],
