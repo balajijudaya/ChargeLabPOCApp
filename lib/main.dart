@@ -26,7 +26,7 @@ Future<void> main() async {
       databaseURL: 'https://chargelab-poc-default-rtdb.firebaseio.com',
     )
   );
-
+  
   runApp(ChargeLabPoCApp());
 }
 
@@ -125,66 +125,72 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     super.dispose();
   }
 
+// TODO: Create 'BrandSplash' and allow for use of cached network image instead of string
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Charge Lab PoC App',
       theme: _partnerBrand.brandTheme,
-      home: StreamBuilder<AuthState>(
-        stream: _authService.authStateController.stream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Navigator(
-              pages: [
-                // Show App Pages
-                if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
-                  MaterialPage(child: 
-                    PageFlow(
-                      shouldLogOut: _authService.logOut,
-                      partnerBrand: _partnerBrand,
-                    )
-                  ),
-
-                // show sign up page
-                if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp)
-                  MaterialPage(child: 
-                    SignUpPage(
-                      shouldShowLogin: _authService.showLogin,
-                      didProvideCredentials: _authService.signUpWithCredentials,
-                      partnerBrand: _partnerBrand,
+      home: BrandSplash(
+        logo: _partnerBrand.logo,
+        backGroundColor: Colors.white,
+        duration: 1000,
+        home: StreamBuilder<AuthState>(
+          stream: _authService.authStateController.stream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Navigator(
+                pages: [
+                  // Show App Pages
+                  if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
+                    MaterialPage(child: 
+                      PageFlow(
+                        shouldLogOut: _authService.logOut,
+                        partnerBrand: _partnerBrand,
                       )
                     ),
 
-                // Show verification code page
-                if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
-                  MaterialPage(child: 
-                    VerificationPage(
-                      didProvideVerificationCode: _authService.verifyCode,
-                      partnerBrand: _partnerBrand,
-                    )
-                  ),
+                  // show sign up page
+                  if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp)
+                    MaterialPage(child: 
+                      SignUpPage(
+                        shouldShowLogin: _authService.showLogin,
+                        didProvideCredentials: _authService.signUpWithCredentials,
+                        partnerBrand: _partnerBrand,
+                        )
+                      ),
 
-                // Show login page
-                if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
-                  MaterialPage(child: 
-                    LoginPage(
-                      shouldShowSignUp: _authService.showSignUp,
-                      didProvideCredentials: _authService.loginWithCredentials,
-                      partnerBrand: _partnerBrand,
-                    )
-                  ),
-              ],
-              onPopPage: (route, result) => route.didPop(result),
-            );
-          } else {
-            // Snapshot has no data, show loading indicator
-            return Container(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(),
-            );
+                  // Show verification code page
+                  if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
+                    MaterialPage(child: 
+                      VerificationPage(
+                        didProvideVerificationCode: _authService.verifyCode,
+                        partnerBrand: _partnerBrand,
+                      )
+                    ),
+
+                  // Show login page
+                  if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
+                    MaterialPage(child: 
+                      LoginPage(
+                        shouldShowSignUp: _authService.showSignUp,
+                        didProvideCredentials: _authService.loginWithCredentials,
+                        partnerBrand: _partnerBrand,
+                      )
+                    ),
+                ],
+                onPopPage: (route, result) => route.didPop(result),
+              );
+            } else {
+              // Snapshot has no data, show loading indicator
+              return Container(
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              );
+            }
           }
-        }
+        )
       )
     );
   }
