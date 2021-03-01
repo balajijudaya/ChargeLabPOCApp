@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'components/auth_credentials.dart';
 
 class SignUpPage extends StatefulWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final ValueChanged<SignUpCredentials> didProvideCredentials;
-  // Triggered to show login page from sign up
-  final VoidCallback shouldShowLogin;
-  final PartnerBrand partnerBrand;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // Key for Text for fields
+  final ValueChanged<SignUpCredentials> didProvideCredentials;  // Callback signature for when user fills form
+  final VoidCallback shouldShowLogin; // Callback to route to login page
+  final PartnerBrand partnerBrand;    // PartnerBrand Obj containing whitelabel assets
 
   SignUpPage({
     Key key,

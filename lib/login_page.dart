@@ -3,11 +3,10 @@ import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final ValueChanged<LogInCredentials> didProvideCredentials;
-  // Triggered to show signup page for new users
-  final VoidCallback shouldShowSignUp;
-  final PartnerBrand partnerBrand;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();   // Key for text form field
+  final ValueChanged<LogInCredentials> didProvideCredentials;     // Callback signature for when user fills form
+  final VoidCallback shouldShowSignUp;  // Callback to route users to sign up page for account creation
+  final PartnerBrand partnerBrand;      // PartnerBrand Obj containing whitelabel assets
 
   LoginPage({
     Key key, 
@@ -21,6 +20,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // Instantiate TextEditingControllers for respective text form fields
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 

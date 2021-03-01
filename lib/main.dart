@@ -65,8 +65,10 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     super.initState();
   }
 
+  /*
 
-  getBrandAssets() {
+  */
+  void getBrandAssets() {
     //Config database directly
     final FirebaseDatabase database = FirebaseDatabase(app: widget.app);
     _brandsRef = database.reference().child('BrandID');
@@ -80,7 +82,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
           greetMsg: _brand['greetMsg'],
           logo: CachedNetworkImage(
             width: 256,
-            height: 180,
+            height: 160,
             imageUrl: _brand['logo'],
             progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(
               value: downloadProgress.progress,
