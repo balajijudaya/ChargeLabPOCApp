@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // Slim version of log in page that passes a verification code up the widget tree
 class VerificationPage extends StatefulWidget {
-  final ValueChanged<String> didProvideVerificationCode;
+  final ValueChanged<String> didProvideVerificationCode;  
   final PartnerBrand partnerBrand;    // PartnerBrand Obj containing whitelabel assets
 
   VerificationPage({Key key, this.didProvideVerificationCode, @required this.partnerBrand}) :

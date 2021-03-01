@@ -44,7 +44,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   final _amplify = Amplify;
   final _authService = AuthService();
   DatabaseReference _brandsRef;
-  StreamSubscription<Event> _dbSubscription;
+  //StreamSubscription<Event> _dbSubscription;
   PartnerBrand _partnerBrand;
   var _brand;
   /*
@@ -66,7 +66,8 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   }
 
   /*
-
+      Fetches the appropriate brand assets per the given BrandID, instantiates a new PartnerBrand obj,
+      assigning it to _partnerBrand for consistent usage accross the app.
   */
   void getBrandAssets() {
     //Config database directly
@@ -103,20 +104,21 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     database.setPersistenceCacheSizeBytes(1000000000);
     _brandsRef.keepSynced(true);
 
-    // TODO: Maybe Axe
+    /*
     _dbSubscription = _brandsRef.onValue.listen((event) {
       setState(() {
+
       });
 
-    
     });
+    */
 
   }
 
   @override
   void dispose() {
-    // Close Database stream subscription TODO: Axe if Axed above subscription
-    _dbSubscription.cancel();
+    // Close Database stream subscription
+    //_dbSubscription.cancel();
     super.dispose();
   }
 
@@ -125,7 +127,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Charge Lab PoC App',
-      theme: brandTheme(),
+      theme: _partnerBrand.brandTheme,
       home: StreamBuilder<AuthState>(
         stream: _authService.authStateController.stream,
         builder: (context, snapshot) {
