@@ -125,8 +125,6 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     super.dispose();
   }
 
-// TODO: Create 'BrandSplash' and allow for use of cached network image instead of string
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -135,7 +133,7 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
       home: BrandSplash(
         logo: _partnerBrand.logo,
         backGroundColor: Colors.white,
-        duration: 1000,
+        duration: 2000,
         home: StreamBuilder<AuthState>(
           stream: _authService.authStateController.stream,
           builder: (context, snapshot) {
