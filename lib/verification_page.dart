@@ -14,6 +14,7 @@ class VerificationPage extends StatefulWidget {
 }
 
 class _VerificationPageState extends State<VerificationPage> {
+  // Instantiate TextEditingControllers for verification text form fields
   final _verificationCodeController = TextEditingController();
 
   @override
@@ -23,6 +24,7 @@ class _VerificationPageState extends State<VerificationPage> {
         minimum: EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           children: [
+            // Brand Logo
             Padding(
               padding: EdgeInsets.only(top: 5, bottom: 120),
               child: Center(
@@ -40,6 +42,7 @@ class _VerificationPageState extends State<VerificationPage> {
     );
   }
 
+  // Returns a widget with a textfield and button for the user to enter a code to verify
   Widget _verificationForm() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +66,7 @@ class _VerificationPageState extends State<VerificationPage> {
     );
   }
 
-
+  // Trim form entry and pass to verification callback
   void _verify() {
     final verificationCode = _verificationCodeController.text.trim();
     widget.didProvideVerificationCode(verificationCode);

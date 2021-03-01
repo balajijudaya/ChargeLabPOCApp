@@ -20,6 +20,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  // Instantiate TextEditingControllers for respective text form fields
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -31,18 +32,21 @@ class _SignUpPageState extends State<SignUpPage> {
         minimum: EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           children: [
+            // Brand Logo
             Padding(
               padding: EdgeInsets.only(top: 5),
               child: Center(
                 child: widget.partnerBrand.logo,
               ),
             ),
+            // Brand Greet Msg
             Text(
               widget.partnerBrand.greetMsg != null ? widget.partnerBrand.greetMsg : "",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
+            // Brand Support phone number
             Text(
               widget.partnerBrand.supportPhone != null ? widget.partnerBrand.supportPhone : "",
               style: TextStyle(
@@ -66,6 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  // Returns a Form Widget for signing up a new user
   Widget _signUpForm() {
     return Form(
       key: widget._formKey,
@@ -140,6 +145,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
 
+  // Trim field entries, create credentials, and pass to callback
   void _signUp() {
     if (widget._formKey.currentState.validate()) {
       final username = _usernameController.text.trim();

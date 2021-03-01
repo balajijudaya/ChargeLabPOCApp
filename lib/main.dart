@@ -45,8 +45,8 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
   final _authService = AuthService();
   DatabaseReference _brandsRef;
   //StreamSubscription<Event> _dbSubscription;
-  PartnerBrand _partnerBrand;
-  var _brand;
+  PartnerBrand _partnerBrand; // PartnerBrand Obj containing whitelabel assets
+
   /*
   Brand ID to fetch brand specific assets from Firebase RTDB
   Must match BrandID in Database
@@ -65,20 +65,23 @@ class _ChargeLabPoCAppState extends State<ChargeLabPoCApp> {
     super.initState();
   }
 
+
   /*
       Fetches the appropriate brand assets per the given BrandID, instantiates a new PartnerBrand obj,
       assigning it to _partnerBrand for consistent usage accross the app.
   */
   void getBrandAssets() {
-    //Config database directly
+    // Configure Firebase database directly
     final FirebaseDatabase database = FirebaseDatabase(app: widget.app);
+
+    // Fetch assets from Firebase Realtime Database depending on app's BrandID
     _brandsRef = database.reference().child('BrandID');
     _brandsRef.once().then((DataSnapshot snapshot) {
       print('Connected to database and read ${snapshot.value}');
-      _brand = snapshot.value[_brandID];
+      var _brand = snapshot.value[_brandID];
 
       setState(() {
-        // Instantiate PartnerBrand Obj with partner specific info
+        // Instantiate PartnerBrand Obj with partner brand specific info
         _partnerBrand = new PartnerBrand(
           greetMsg: _brand['greetMsg'],
           logo: CachedNetworkImage(

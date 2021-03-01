@@ -2,8 +2,8 @@ import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  final VoidCallback shouldLogOut;
-  final PartnerBrand partnerBrand;
+  final VoidCallback shouldLogOut;  // Callback to trigger user to logout and be routed to login page
+  final PartnerBrand partnerBrand;  // PartnerBrand Obj containing whitelabel assets
 
   HomePage({Key key, this.shouldLogOut, this.partnerBrand}) : super(key: key);
   
