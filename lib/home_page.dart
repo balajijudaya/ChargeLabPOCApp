@@ -1,10 +1,23 @@
 import 'package:ChargeLabPoCApp/components/white_label.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  final VoidCallback shouldLogOut;
+class HomePage extends StatefulWidget {
+  final VoidCallback shouldLogOut;  // Callback to trigger user to logout and be routed to login page
+  final PartnerBrand partnerBrand;  // PartnerBrand Obj containing whitelabel assets
 
-  HomePage({Key key, this.shouldLogOut}) : super(key: key);
+  HomePage({Key key, this.shouldLogOut, this.partnerBrand}) : super(key: key);
+  
+  
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +35,26 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: GestureDetector(
               child: Icon(Icons.logout),
-              onTap: shouldLogOut,
+              onTap: widget.shouldLogOut,
             ),
           )
         ],
       ),
       body: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 40),
-        child: Center(
-          child: BrandLogo(
-            width: 64,
-            height: 64
-          ),
-        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top:48.0),
+              child: widget.partnerBrand.logo
+            
+            
+            ),
+            
+          ],
+        )
       )
     );
   }
+
 }

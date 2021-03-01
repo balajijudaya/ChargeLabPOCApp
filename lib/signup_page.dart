@@ -3,18 +3,24 @@ import 'package:flutter/material.dart';
 import 'components/auth_credentials.dart';
 
 class SignUpPage extends StatefulWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final ValueChanged<SignUpCredentials> didProvideCredentials;
-  // Triggered to show login page from sign up
-  final VoidCallback shouldShowLogin;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // Key for Text for fields
+  final ValueChanged<SignUpCredentials> didProvideCredentials;  // Callback signature for when user fills form
+  final VoidCallback shouldShowLogin; // Callback to route to login page
+  final PartnerBrand partnerBrand;    // PartnerBrand Obj containing whitelabel assets
 
-  SignUpPage({Key key, this.didProvideCredentials, this.shouldShowLogin}) : super(key: key);
+  SignUpPage({
+    Key key,
+    this.didProvideCredentials,
+    this.shouldShowLogin,
+    @required this.partnerBrand,
+  }) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  // Instantiate TextEditingControllers for respective text form fields
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -26,21 +32,29 @@ class _SignUpPageState extends State<SignUpPage> {
         minimum: EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           children: [
+            // Brand Logo
             Padding(
-              padding: EdgeInsets.only(top: 80),
-              child: Center(child: BrandLogo(
-                height: 64,
-                width: 64,
-              )),
+              padding: EdgeInsets.only(top: 5),
+              child: Center(
+                child: widget.partnerBrand.logo,
+              ),
             ),
-            BrandMessage(
+            // Brand Greet Msg
+            Text(
+              widget.partnerBrand.greetMsg != null ? widget.partnerBrand.greetMsg : "",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Padding(padding: EdgeInsets.only(bottom: 90)),
-          
-            // Sign up form
+            // Brand Support phone number
+            Text(
+              widget.partnerBrand.supportPhone != null ? widget.partnerBrand.supportPhone : "",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(bottom: 60)),
             _signUpForm(),
             // Log in button
             Container(
@@ -56,6 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  // Returns a Form Widget for signing up a new user
   Widget _signUpForm() {
     return Form(
       key: widget._formKey,
@@ -130,6 +145,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
 
+  // Trim field entries, create credentials, and pass to callback
   void _signUp() {
     if (widget._formKey.currentState.validate()) {
       final username = _usernameController.text.trim();

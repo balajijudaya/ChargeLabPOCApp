@@ -1,63 +1,21 @@
-/*
-  File containing all the definitions for messages, logos, etc., for easy and quick
-  brand specific app customization all in one place.
-*/
-import 'package:flutter_svg/svg.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 /*
-  Custom Brand Logo
+  Object that stores white label assets, pulled from a Firebase Real-time Database and
+  instatiated in _ChargeLabPoCAppState -> void getBrandAssets()
 */
-class BrandLogo extends StatelessWidget {
-  final double width;
-  final double height;
-  
-  BrandLogo({@required this.width, @required this.height});
+class PartnerBrand {
+  final String greetMsg;
+  final CachedNetworkImage logo;
+  final String supportPhone;
+  final ThemeData brandTheme;
 
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      "assets/logos/chargelab-logo-white.svg",
-      semanticsLabel: "ChargeLab Logo",
-      color: Colors.black,
-      width: width,
-      height: height,
-    );
-  }
+  PartnerBrand({
+      @required this.greetMsg,
+      @required this.logo,
+      @required this.supportPhone,
+      @required this.brandTheme,
+  });
+
 }
-
-/*
-  Custom Brand Message
-*/
-class BrandMessage extends StatelessWidget {
-  final TextStyle style;
-
-  BrandMessage({this.style});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      "Custom Brand Message",
-      style: style,
-    );
-  }
-}
-
-/*
-  Custom Brand Theme
-*/
-ThemeData brandTheme() {
-  return ThemeData(
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    primarySwatch: Colors.blue,
-    primaryColor: Color(0xFF18a1d7),
-    accentColor: Colors.lightBlueAccent,
-    backgroundColor: Colors.white,
-    
-  );
-}
-
-
-/*
-  Custom Brand Splash Screen
-*/
