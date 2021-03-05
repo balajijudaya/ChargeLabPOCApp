@@ -1,7 +1,7 @@
 
 
 # Charge Lab Proof of Concept App
-> Proof of concept app for the Charge Lab Coding Challenge. Performant, extensible, and easily maintainable app designed to be white labelled for partner brands. User authentication, registration, and email verification implemented with AWS Amplify.
+> Proof of concept app for the Charge Lab Coding Challenge. Performant, extensible, and easily maintainable app designed to be white labelled for partner brands. User authentication, registration, and email verification implemented with AWS Amplify. Real-time asset updating for white labelling accomplished with Google Firebase RTDB and Firebase Storage.
 
 
 
